@@ -1,0 +1,5 @@
+package com.pravin.util;
+
+public class ErrorHandler {
+
+}

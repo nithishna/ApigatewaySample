@@ -1,0 +1,5 @@
+package com.pravin.entity;
+
+public class BenefitPlanAssociationEntity {
+
+}

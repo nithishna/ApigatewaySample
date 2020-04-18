@@ -1,0 +1,17 @@
+package com.pravin.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+import com.pravin.entity.BenefitPlanEntity;
+import com.pravin.model.BenefitPlan;
+
+@Mapper
+public interface BenefitPlanMapper {
+
+	BenefitPlanMapper mapper = Mappers.getMapper(BenefitPlanMapper.class);
+	
+	BenefitPlanEntity convertToEntity(BenefitPlan dto);
+	
+	BenefitPlan convertToDto(BenefitPlanEntity entity);
+}

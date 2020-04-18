@@ -1,0 +1,9 @@
+package com.pravin.model;
+
+public class BenefitPlan {
+	private Long id;
+	private Long specialServiceCount;
+	private Long copay;
+	private Long coInsurance;
+	private Long deductible;
+}

@@ -1,0 +1,5 @@
+package com.pravin.model;
+
+public class ErrorDetails {
+
+}

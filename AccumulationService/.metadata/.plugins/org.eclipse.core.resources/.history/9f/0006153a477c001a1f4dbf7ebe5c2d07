@@ -1,0 +1,5 @@
+package com.pravin.config;
+
+public class SwaggerConfig {
+
+}

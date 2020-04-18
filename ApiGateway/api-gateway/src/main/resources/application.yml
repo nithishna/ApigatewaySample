@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: api-gateway
+
+jwt:
+  header: Bearer
+
+server:
+  port: 8100
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+zuul:
+  routes:
+    auth:
+      path: /auth/**
+      serviceId: auth-server
+    benefit:
+      path: /benefit/**
+      serviceId: plan-service 
+    accum:
+      path: /accum/**
+      serviceId: accum-service
+  ignoredServices: '*'
+  host:
+    time-to-live: -1
+    connect-timeout-millis: 5000
+    max-per-route-connections: 10000
+    max-total-connections: 5000
+    socket-timeout-millis: 60000
+  semaphore:
+    max-semaphores: 500
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+
+ribbon:
+  ReadTimeout: 60000
+  connection-timeout: 3000
+  eureka:
+    enabled: true

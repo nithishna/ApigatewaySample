@@ -1,0 +1,19 @@
+package com.pravin.service;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.pravin.model.BenefitPlanAssociation;
+import com.pravin.repo.SummaryRepo;
+
+@Service
+public class SummaryService {
+
+	@Resource
+	private  SummaryRepo repo;	
+	
+	public void updateSummary(String username, Long price) {
+		BenefitPlanAssociation[] association = restTemplate.getForObject("", BenefitPlanAssociation[].class);
+	}
+}

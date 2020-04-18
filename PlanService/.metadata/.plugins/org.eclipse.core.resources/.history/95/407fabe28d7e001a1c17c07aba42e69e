@@ -1,0 +1,60 @@
+package com.pravin.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.pravin.entity.BenefitPlanAssociationEntity;
+import com.pravin.entity.BenefitPlanEntity;
+import com.pravin.mapper.BenefitPlanAssociationMapper;
+import com.pravin.mapper.BenefitPlanMapper;
+import com.pravin.model.BenefitPlan;
+import com.pravin.model.BenefitPlanAssociation;
+import com.pravin.repo.BenefitPlanAssociationRepo;
+import com.pravin.repo.BenefitPlanRepo;
+
+import javassist.NotFoundException;
+
+@Service
+public class BenefitPlanService {
+
+	@Resource
+	BenefitPlanRepo repo;
+	
+	@Resource
+	BenefitPlanAssociationRepo associationRepo;
+	
+	public void addBenefitPlan(BenefitPlan dto) {
+		BenefitPlanEntity entity = BenefitPlanMapper.mapper.convertToEntity(dto);
+		repo.save(entity);
+	}
+	
+	public List<BenefitPlan> getAllBenefitPlan() {
+		Iterable<BenefitPlanEntity> iterableEntities = repo.findAll();
+		List<BenefitPlanEntity> entities = new ArrayList<>();
+		iterableEntities.forEach(entities::add);
+		return BenefitPlanMapper.mapper.convertEntitiesToDtos(entities);
+	}
+	
+	public BenefitPlan getBenefitPlanById(long id) throws NotFoundException {
+		Optional<BenefitPlanEntity> entity = repo.findById(id);
+		if(entity.isPresent()) {
+			return BenefitPlanMapper.mapper.convertToDto(entity.get());
+		}else
+			throw new NotFoundException("Plan not found");
+	}
+	
+	public List<BenefitPlanAssociation> getAllPlansByUsername(String username){
+		List<BenefitPlanAssociation> dtos = new ArrayList<>();
+		List<BenefitPlanAssociationEntity> entities = associationRepo.findByUsername(username);
+		for(BenefitPlanAssociationEntity entity : entities) {
+			BenefitPlanAssociation dto = BenefitPlanAssociationMapper.mapper.convertToDto(entity);
+			dtos.add(dto);
+		}
+		return dtos;
+	}
+}

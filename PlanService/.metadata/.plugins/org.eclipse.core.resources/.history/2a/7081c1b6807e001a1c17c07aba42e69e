@@ -1,0 +1,14 @@
+package com.pravin.model;
+
+import java.util.Date;
+
+public class BenefitPlanAssociation {
+	private Long id;
+	
+	private String username;
+	
+	private BenefitPlan benefitPlan;
+	
+	private Date startDate;
+	private Date  endDate;
+}

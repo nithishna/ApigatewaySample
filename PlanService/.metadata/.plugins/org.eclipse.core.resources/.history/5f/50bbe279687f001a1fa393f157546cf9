@@ -1,0 +1,19 @@
+package com.pravin.mapper;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
+
+import com.pravin.entity.BenefitPlanAssociationEntity;
+import com.pravin.model.BenefitPlanAssociation;
+
+@Mapper(uses = BenefitPlanMapper.class)
+public interface BenefitPlanAssociationMapper {
+	BenefitPlanAssociationMapper mapper = Mappers.getMapper(BenefitPlanAssociationMapper.class);
+	
+	@Named("toEntity")
+	BenefitPlanAssociationEntity convertToEntity(BenefitPlanAssociation dto);
+	
+	@Named("toDto")
+	BenefitPlanAssociation convertToDto(BenefitPlanAssociationEntity entity);
+}
